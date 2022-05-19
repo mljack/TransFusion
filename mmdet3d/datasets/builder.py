@@ -18,6 +18,11 @@ OBJECTSAMPLERS = Registry('Object sampler')
 DATASETS = Registry('dataset')
 PIPELINES = Registry('pipeline')
 
+from mmdet.datasets.coco import CocoDataset as CC
+@DATASETS.register_module()
+class CocoDataset(CC):
+    pass
+
 
 def build_dataset(cfg, default_args=None):
     from mmdet3d.datasets.dataset_wrappers import CBGSDataset
