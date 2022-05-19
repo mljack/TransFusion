@@ -197,11 +197,14 @@ def inference_multi_modality_detector(model, pcd, image, ann_file):
     #       depth2img to .pkl annotations in the future.
     # LiDAR to image conversion
     if box_mode_3d == Box3DMode.LIDAR:
-        rect = info['calib']['R0_rect'].astype(np.float32)
-        Trv2c = info['calib']['Tr_velo_to_cam'].astype(np.float32)
-        P2 = info['calib']['P2'].astype(np.float32)
-        lidar2img = P2 @ rect @ Trv2c
-        data['img_metas'][0].data['lidar2img'] = lidar2img
+        if "lidar2img" in info['calib']:
+            data['img_metas'][0].data['lidar2img'] = info['calib']["lidar2img"]
+        else:
+            rect = info['calib']['R0_rect'].astype(np.float32)
+            Trv2c = info['calib']['Tr_velo_to_cam'].astype(np.float32)
+            P2 = info['calib']['P2'].astype(np.float32)
+            lidar2img = P2 @ rect @ Trv2c
+            data['img_metas'][0].data['lidar2img'] = lidar2img
     # Depth to image conversion
     elif box_mode_3d == Box3DMode.DEPTH:
         rt_mat = info['calib']['Rt']
