@@ -86,7 +86,7 @@ Documentation: https://mmdetection3d.readthedocs.io/
 
 ## Introduction
 
-English | [¼òÌåÖÐÎÄ](README_zh-CN.md)
+English | [ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½](README_zh-CN.md)
 
 The master branch works with **PyTorch 1.3+**.
 
@@ -112,15 +112,15 @@ a part of the OpenMMLab project developed by [MMLab](http://mmlab.ie.cuhk.edu.hk
 
 - **High efficiency**
 
-  It trains faster than other codebases. The main results are as below. Details can be found in [benchmark.md](./docs/benchmarks.md). We compare the number of samples trained per second (the higher, the better). The models that are not supported by other codebases are marked by `¡Á`.
+  It trains faster than other codebases. The main results are as below. Details can be found in [benchmark.md](./docs/benchmarks.md). We compare the number of samples trained per second (the higher, the better). The models that are not supported by other codebases are marked by `ï¿½ï¿½`.
 
   | Methods | MMDetection3D | [OpenPCDet](https://github.com/open-mmlab/OpenPCDet) |[votenet](https://github.com/facebookresearch/votenet)| [Det3D](https://github.com/poodarchu/Det3D) |
   |:-------:|:-------------:|:---------:|:-----:|:-----:|
-  | VoteNet | 358           | ¡Á         |   77  | ¡Á     |
-  | PointPillars-car| 141           | ¡Á         |   ¡Á  | 140     |
-  | PointPillars-3class| 107           |44     |   ¡Á      | ¡Á    |
-  | SECOND| 40           |30     |   ¡Á      | ¡Á    |
-  | Part-A2| 17           |14     |   ¡Á      | ¡Á    |
+  | VoteNet | 358           | ï¿½ï¿½         |   77  | ï¿½ï¿½     |
+  | PointPillars-car| 141           | ï¿½ï¿½         |   ï¿½ï¿½  | 140     |
+  | PointPillars-3class| 107           |44     |   ï¿½ï¿½      | ï¿½ï¿½    |
+  | SECOND| 40           |30     |   ï¿½ï¿½      | ï¿½ï¿½    |
+  | Part-A2| 17           |14     |   ï¿½ï¿½      | ï¿½ï¿½    |
 
 Like [MMDetection](https://github.com/open-mmlab/mmdetection) and [MMCV](https://github.com/open-mmlab/mmcv), MMDetection3D can also be used as a library to support different projects on top of it.
 
