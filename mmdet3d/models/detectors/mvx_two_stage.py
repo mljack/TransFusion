@@ -92,12 +92,12 @@ class MVXTwoStageDetector(Base3DDetector):
                 self.img_backbone.init_cfg = dict(
                     type='Pretrained', checkpoint=img_pretrained)
 
-        # if self.with_img_roi_head:
-        #     if img_pretrained is not None:
-        #         warnings.warn('DeprecationWarning: pretrained is a deprecated '
-        #                       'key, please consider using init_cfg.')
-        #         self.img_roi_head.init_cfg = dict(
-        #             type='Pretrained', checkpoint=img_pretrained)
+        if self.with_img_roi_head:
+            if img_pretrained is not None:
+                warnings.warn('DeprecationWarning: pretrained is a deprecated '
+                              'key, please consider using init_cfg.')
+                self.img_roi_head.init_cfg = dict(
+                    type='Pretrained', checkpoint=img_pretrained)
         # if self.with_pts_backbone:
         #     if pts_pretrained is not None:
         #         warnings.warn('DeprecationWarning: pretrained is a deprecated '
@@ -106,7 +106,7 @@ class MVXTwoStageDetector(Base3DDetector):
         #             type='Pretrained', checkpoint=pts_pretrained)
 
         if self.with_img_roi_head:
-            self.img_roi_head.init_weights(img_pretrained)
+            self.img_roi_head.init_weights()
         if self.with_img_rpn:
             self.img_rpn_head.init_weights()
         if self.with_pts_bbox:

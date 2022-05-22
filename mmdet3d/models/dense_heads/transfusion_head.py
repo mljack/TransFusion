@@ -17,9 +17,9 @@ from mmdet3d.models import builder
 from mmdet3d.models.builder import HEADS, build_loss
 from mmdet3d.models.utils import clip_sigmoid
 from mmdet3d.models.fusion_layers import apply_3d_transformation
-from mmdet3d.ops.iou3d.iou3d_utils import nms_gpu
+from mmcv.ops import nms
 from mmdet.core import build_bbox_coder, multi_apply, build_assigner, build_sampler, AssignResult
-from mmdet3d.ops.roiaware_pool3d import points_in_boxes_batch
+from mmcv.ops.points_in_boxes import points_in_boxes_all
 
 
 class PositionEmbeddingLearned(nn.Module):
@@ -1348,7 +1348,7 @@ class TransFusionHead(nn.Module):
                             else:
                                 boxes_for_nms = xywhr2xyxyr(img_metas[i]['box_type_3d'](boxes3d[task_mask][:, :7], 7).bev)
                                 top_scores = scores[task_mask]
-                                task_keep_indices = nms_gpu(
+                                task_keep_indices = nms(
                                     boxes_for_nms,
                                     top_scores,
                                     thresh=task['radius'],
