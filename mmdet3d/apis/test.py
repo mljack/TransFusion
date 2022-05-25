@@ -50,7 +50,8 @@ def single_gpu_test(model,
                     result,
                     out_dir=out_dir,
                     show=show,
-                    score_thr=show_score_thr)
+                    #score_thr=show_score_thr
+                    )
             # Visualize the results of MMDetection model
             # 'show_result' is MMdetection visualization API
             else:
@@ -81,7 +82,8 @@ def single_gpu_test(model,
                         result[i],
                         show=show,
                         out_file=out_file,
-                        score_thr=show_score_thr)
+                        #score_thr=show_score_thr
+                        )
         results.extend(result)
 
         batch_size = len(result)
