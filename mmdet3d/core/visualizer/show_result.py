@@ -4,6 +4,7 @@ from os import path as osp
 import mmcv
 import numpy as np
 import trimesh
+import cv2
 
 from .image_vis import (draw_camera_bbox3d_on_img, draw_depth_bbox3d_on_img,
                         draw_lidar_bbox3d_on_img)
@@ -216,6 +217,25 @@ def show_seg_result(points,
         _write_obj(pred_seg_color, osp.join(result_path,
                                             f'{filename}_pred.obj'))
 
+def myimshow(img, win_name = '', wait_time = 0):
+    """Show an image.
+    Args:
+        img (str or ndarray): The image to be displayed.
+        win_name (str): The window name.
+        wait_time (int): Value of waitKey param.
+    """
+    cv2.imshow(win_name, img)
+    if wait_time == 0:  # prevent from hanging if windows was closed
+        while True:
+            ret = cv2.waitKey(1)
+
+            closed = cv2.getWindowProperty(win_name, cv2.WND_PROP_VISIBLE) < 1
+            # if user closed window or if some key pressed
+            if closed or ret != -1:
+                break
+    else:
+        ret = cv2.waitKey(wait_time)
+    return ret
 
 def show_multi_modality_result(img,
                                gt_bboxes,
@@ -275,7 +295,9 @@ def show_multi_modality_result(img,
                 proj_mat,
                 img_metas,
                 color=pred_bbox_color)
-        mmcv.imshow(show_img, win_name='project_bbox3d_img', wait_time=0)
+        ret = myimshow(show_img, win_name='project_bbox3d_img', wait_time=0)
+        if ret == 27:
+            exit(0)
 
     if img is not None:
         mmcv.imwrite(img, osp.join(result_path, f'{filename}_img.png'))

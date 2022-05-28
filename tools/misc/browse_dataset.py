@@ -90,6 +90,11 @@ def build_data_cfg(config_path, skip_type, aug, cfg_options):
         x for x in show_pipeline if x['type'] not in skip_type
     ]
 
+    if cfg.data.train.type == "CBGSDataset":
+        cfg.data.train['dataset']['pipeline'] = train_data_cfg['pipeline']
+    else:
+        cfg.data.train['pipeline'] = train_data_cfg['pipeline']
+
     return cfg
 
 
@@ -145,6 +150,12 @@ def show_proj_bbox_img(input, out_dir, show=False, is_nus_mono=False):
     gt_bboxes = input['gt_bboxes_3d']._data
     img_metas = input['img_metas']._data
     img = input['img']._data.numpy()
+
+    camera_id = 1
+    img = img[camera_id]
+    img_metas['filename'] = img_metas['filename'][camera_id]
+    img_metas['lidar2img'] = img_metas['lidar2img'][camera_id]
+
     # need to transpose channel to first dim
     img = img.transpose(1, 2, 0)
     # no 3D gt bboxes, just show img

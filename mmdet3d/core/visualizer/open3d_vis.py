@@ -375,7 +375,7 @@ class Visualizer(object):
         assert 0 <= rot_axis <= 2
 
         # init visualizer
-        self.o3d_visualizer = o3d.visualization.Visualizer()
+        self.o3d_visualizer = o3d.visualization.VisualizerWithKeyCallback()
         self.o3d_visualizer.create_window()
         mesh_frame = geometry.TriangleMesh.create_coordinate_frame(
             size=1, origin=[0, 0, 0])  # create coordinate frame
@@ -451,6 +451,13 @@ class Visualizer(object):
             save_path (str, optional): path to save image. Default: None.
         """
 
+        def close_vis_window(self):
+            self.close()
+        def quit_vis(self):
+            exit()
+
+        self.o3d_visualizer.register_key_callback(256, quit_vis)        # on ESC
+        self.o3d_visualizer.register_key_callback(32, close_vis_window) # on SPACE
         self.o3d_visualizer.run()
 
         if save_path is not None:
