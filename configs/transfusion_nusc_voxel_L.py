@@ -113,7 +113,7 @@ test_pipeline = [
         ])
 ]
 data = dict(
-    samples_per_gpu=2,
+    samples_per_gpu=1,
     workers_per_gpu=6,
     train=dict(
         type='CBGSDataset',
@@ -258,7 +258,7 @@ checkpoint_config = dict(interval=1)
 log_config = dict(
     interval=50,
     hooks=[dict(type='TextLoggerHook'),
-           #dict(type='TensorboardLoggerHook')
+           dict(type='TensorboardLoggerHook')
            ])
 dist_params = dict(backend='nccl')
 log_level = 'INFO'
